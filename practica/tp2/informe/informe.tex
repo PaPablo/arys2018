@@ -36,17 +36,185 @@
 \section*{1. Footprinting}
 \addcontentsline{toc}{section}{Footprinting}
 
-Footprinting, también conocido como \texttt{reconocimiento} es una técnica utilizada para recolectar información sobre dispositivos y su entorno.
+\subsection*{¿Qué es footprinting?}
+
+Footprinting \nocite{WikipediaFootprinting}, también conocido como \texttt{reconocimiento} es una técnica utilizada para recolectar información sobre dispositivos y su entorno. Dentro de los métodos que se pueden utilizar se encuentran:
+
+\begin{itemize}
+    \item Consultas DNS
+    \item Identificación de sistema Operativo (nmap)
+    \item Escaneo de puertos
+    \item Querys de WHOIS
+    \item google hacking
+\end{itemize}
+
+\subsubsection*{DIG y WHOIS}
+
+Se utilizaran las siguientes dos organizaciones
+
+\begin{itemize}
+    \item Administración Federal de Ingresos Públicos
+        \begin{itemize}
+            \item \texttt{afip.gov.ar}
+        \end{itemize}
+    \item IBM
+        \begin{itemize}
+            \item \texttt{ibm.com} 
+        \end{itemize}
+\end{itemize}
+
+\textbf{DIG}: es una herramienta para realizar peticiones a servidores de nombres. tomando un nombre de dominio y realizando el lookup correspondiente.
+
+\textbf{WHOIS}: herramienta que busca un nombre de dominio en la base de datos de ls RFC 3912, la base de datos que almacena la correspondencia entre usuarios registrados y nombres de dominio.
+
+Realizamos las consultas utilizando \texttt{afip.gov.ar} y listamos los resultados
+
+\begin{itemize}
+    \item name: ADMINISTRACION FEDERAL DE INGRESOS PUBLICOS
+    \item IP (dns lookup): 200.1.116.6
+    \item Fecha de registro:  1997-05-26 00:00:00
+    \item Fecha expiración: 2019-06-25 00:00:00
+    \item Servidor de nombres: ns1.afip.gov.ar (200.1.116.10/32)
+    \item Registrar: nicar
+\end{itemize}
+
+Ahora con \texttt{ibm.com} 
+
+\begin{itemize}
+    \item name: IBM.COM
+    \item IP (dns lookup): 129.42.38.10
+    \item Fecha de registro: 1986-03-19T05:00:00Z
+    \item Fecha expiración: 2019-03-20T04:00:00Z
+    \item Servidor de nombres: EUR2.AKAM.NET
+    \item Registrar: CSC Corporate Domains, Inc.
+\end{itemize}
+
+\subsection*{NETCRAFT - www.unp.edu.ar}
+
+Realizamos la consulta en \texttt{netcraft.net} sobre \texttt{www.unp.edu.ar} y listamos algunos datos que se muestran allí.
+
+\begin{tabular}{l | l}
+    \hline 
+    Site title & Universidad Nacional de la Patagonia San Juan Bosco \\ \hline
+    Date first seen & June 1998 \\ \hline
+    language & Spanish \\ \hline
+    Description & Sitio web de la Universidad Nacional de la Patagonia San Juan Bosco. \\ \hline
+    Netcraft Risk Rating & 7/10 \\ \hline
+    Netblock Owner & Red de Interconexion Universitaria \\ \hline
+    Nameserver & chenque.unp.edu.ar \\ \hline
+    IP address & 170.210.88.21 (VirusTotal) \\ \hline
+    DNS admin & hostmaster@unp.edu.ar \\ \hline
+    Hosting company & unp.edu.ar \\ \hline
+    Top Level Domain & Argentina (.edu.ar) \\ \hline
+    Hosting country & AR \\ \hline
+    
+\end{tabular}
+
+\subsection*{archive.org}
+
+Este sitio ofrece, una snapshot del sitio que se busque. Proviendo las cualidades, casi, completas que nos ofrecía. De este modo, si en algún momento se dejó al descubierto alguna información de valor y se realizó la snapshot, ese dato está disponible, por más que se haya cambiado en el sitio real.
+
+\subsection*{Fingerprinting}
+
+\begin{itemize}
+    \item \textbf{www.google.com.ar}: gws ()
+    \item \textbf{www.ing.unp.edu.ar}: nginx/1.10.3
+    \item \textbf{www.microsoft.com}: Apache
+    \item \textbf{www.google.com.ar}: Microsoft-IIS/10.0
+\end{itemize}
+
+\section*{Sección 2}
+
+\subsection*{Scanning}
+
+Consiste en la búsqueda exhaustiva de diversas cuestiones a determinado nivel o niveles para encontrar vulnerabilidades.
+
+El \textbf{escaneo de hosts} se realiza dentro una subred y permite enumerar los dispositivos que se encuentran conectados a ella. Teniendo como objetivo un equipo en particular, se puede realizar un \textbf{escaneo de puertos} de forma tal que se puede saber qué puertos se encuentran abiertos y disponibles para inciar una conexión.
+
+Cuando se cuenta con red de Wi-Fi se puede realizar un \textbf{escaneo de redes Wi-Fi} para identificar las redes disponibles y poder hacer algún ataque a alguna en particular. Lo mismo se puede hacer cuando se tiene conectividad por bluetooh, listando los dispositivos disponibles para atacar.
+
+
+\subsection*{Posibilidad de escaneo}
+
+\begin{itemize}
+    \item Sólo manipulando ARP: Escaneo de Hosts. Requiere estar en el mismo segmento de red.
+    \item Sólo manipulando ICMP: Escaneo de puertos y host. No requiere estar en la misma red.
+    \item Sólo manipulando TCP: Escaneo de puertos. No requiere estar en la misma red.
+    \item Sólo manipulando UDP: Escaneo de puertos. No requiere estar en la misma red
+    \item Interpretando tráfico: Escaneo de Wi-Fi, Bluetooth. Hosts y puertos. Se puede estar fuera de la red, en el caso de las radiofrecuencias. Salvo para LAN, ahí es mandatorio estar dentro de alguna red. 
+\end{itemize}
+
+\subsection*{Escaneo de puertos}
+
+En la máquina virtual provsita por la cátedra, como primera medida, ponemos a funcionar el servicio de ssh, que atiende en el puerto 22 y corremos el comando netstat para verificar la existencia de puertos abiertos.
+
+\begingroup
+    \fontsize{8pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+root@kali:~# netstat -nltp4
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1645/sshd           
+\end{lstlisting}
+\endgroup
+
+Luego, utilizando \texttt{nmap} escaneamos por puertos TCP que se encuentren abiertos.
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+root@kali:~# nmap -sV localhost
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-10-15 18:22 EDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000020s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 999 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10 (protocol 2.0)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.36 seconds
+\end{lstlisting}
+\endgroup
+
+Como se puede observar, el puerto 22 (propio de ssh) fue detectado por nmap.
+
+\pagebreak
+
+Seguidamente, le pedimos a \texttt{nmap}, explicitamente, que escanee los 65536 puertos disponibles.
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+root@kali:~# nmap -p0-65535 localhost
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-10-15 18:52 EDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000020s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 65535 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+
+Nmap done: 1 IP address (1 host up) scanned in 0.57 seconds
+\end{lstlisting}
+\endgroup
+
+\subsubsection*{Escaneo manual de puertos}
+
+\textbf{hping3 -c 3 -S -p 80 localhost}: en la salida del analizador de protocolos se observa que el host responde con la bandera de \texttt{reset}. Indicando que el puerto está cerrado. En este caso se realiza un escaneo de tipo SYN. Ya que sólo se envía un paquete con la bandera \texttt{SYN}, imitando el inicio de una conexión.
 
 
 \pagebreak
-\pagebreak
+
 %-------------------------------------------------------------------------------
 % REFERENCES
 %-------------------------------------------------------------------------------
+
 \newpage
-\section*{References}
-\addcontentsline{toc}{section}{References}
+\printbibliography
 
 \end{document}
 
@@ -61,6 +229,7 @@ Footprinting, también conocido como \texttt{reconocimiento} es una técnica uti
 %   \centering
 %   \label{label:file_name}
 %\end{figure}
+
 
 %\begin{figure}[!ht]
 %   \centering

@@ -1,0 +1,17 @@
+[0] Config.pm:302> INFO - This is Biber 2.11
+[0] Config.pm:305> INFO - Logfile is 'informe.blg'
+[18] biber:313> INFO - === Thu Oct 11, 2018, 17:22:48
+[35] Biber.pm:371> INFO - Reading 'informe.bcf'
+[80] Biber.pm:857> INFO - Found 1 citekeys in bib section 0
+[89] Biber.pm:3976> INFO - Processing section 0
+[97] Biber.pm:4136> INFO - Looking for bibtex format file 'references.bib' for section 0
+[98] bibtex.pm:1500> INFO - LaTeX decoding ...
+[99] bibtex.pm:1316> INFO - Found BibTeX data source 'references.bib'
+[102] Utils.pm:193> WARN - month field 'oct' in entry 'WikipediaFootprinting' is not an integer - this will probably not sort properly.
+[108] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[108] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[108] Biber.pm:3804> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[108] Biber.pm:3810> INFO - No sort tailoring available for locale 'en-US'
+[115] bbl.pm:617> INFO - Writing 'informe.bbl' with encoding 'UTF-8'
+[115] bbl.pm:720> INFO - Output to informe.bbl
+[115] Biber.pm:110> INFO - WARNINGS: 1
