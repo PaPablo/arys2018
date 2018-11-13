@@ -716,9 +716,104 @@ Luego evidenciamos la conexión de red entre los nodos.
 \end{figure}
 \pagebreak
 
+\subsubsection*{Estudio de casos}
+
+Ponemos a correr la topología y luego de correr el script que levante los mock-up de los servicios observamos las siguientes salidas de los comandos \texttt{netstat -nat} y \texttt{netstat -nau}.
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}
+# natstat -nat
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:21              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN     
+tcp6       0      0 :::80                   :::*                    LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN     
+tcp6       0      0 :::25                   :::*                    LISTEN     
+tcp6       0      0 :::443                  :::*                    LISTEN 
+
+# netstat -nau
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State   
+\end{lstlisting}
+\endgroup
+
+Listamos las configuraciones del firewall para lograr las siguientes condiciones:
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}
+# Se permita únicamente el acceso desde la LAN a los servicios: FTP, SSH y HTTP que corren en el Servidor.
+
+# Borramos las reglas existentes
+iptables -F
+iptables -X
+# Politica Restrictiva
+iptables -P FORWARD DROP
+# Conexión al servidor en servicio web
+iptables -A FORWARD -p tcp --dport 80 --src 10.0.0.0/24 --dst 10.0.1.10 -j ACCEPT
+# FTP
+iptables -A FORWARD -p tcp --dport 21 --src 10.0.0.0/24 --dst 10.0.1.10 -j ACCEPT
+# ssh
+iptables -A FORWARD -p tcp --dport 22 --src 10.0.0.0/24 --dst 10.0.1.10 -j ACCEPT
+# Dejar pasar en ambos sentidos conexiones ya establecidas y paquetes relacionados
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Prohibir toda conexión hacia el firewall tanto desde el servidor como desde la LAN
+iptables -P INPUT DROP  
+
+# Que desde el Firewall se puedan establecer conexiones SSH hacia el servidor
+iptables -A OUTPUT -p tcp --dport 22 --dst 10.0.1.10 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 443 --dst 10.0.1.10 -j ACCEPT
+iptables -A INPUT -m state --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Permitir conexiones desde el servidor a los clientes de la LAN a través de SSH
+iptables -A FORWARD -p tcp --dport 22 -dst 10.0.0.0/24
+\end{lstlisting}
+\endgroup
+
 %-------------------------------------------------------------------------------
 % REFERENCES
 %-------------------------------------------------------------------------------
+
+\subsubsection*{Politica restrictiva sin estados}
+
+Volvemos a cero las configuraciones del firewall y configuramos para satisfacer los siguientes requisitos:
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+# Configure el firewall con una política restrictiva y sin estados, de modo 
+# que se permita únicamente el acceso desde el cliente al servidor, a los 
+# servicios: FTP, SSH y HTTP. Tenga en cuenta que ninguna otra comunicación
+# hacia el firewall debe ser permitida, ya sea desde el cliente como desde
+# el Servidor. Ademas, desde el firewall se deben poder iniciar conexiones 
+# SSH al Servidor.
+
+# Politica restrictiva
+iptables -P FORWARD DROP
+
+# Conexión al servidor mediante ssh, ftp y http al servidor
+iptables -P OUTPUT DROP
+iptables -A FORWARD -p tcp --dport 22 --dst 10.0.1.10 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 21 --dst 10.0.1.10 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 80 --dst 10.0.1.10 -j ACCEPT
+iptables -A FORWARD -p tcp --sport 22 --src 10.0.1.10 -j ACCEPT
+iptables -A FORWARD -p tcp --sport 21 --src 10.0.1.10 -j ACCEPT
+iptables -A FORWARD -p tcp --sport 80 --src 10.0.1.10 -j ACCEPT
+
+# Permitir conexiones SSH desde el firewall al servidor
+iptables -A OUTPUT -p tcp --dport 22 --dst 10.0.1.10 -j ACCEPT
+iptables -A INPUT -p tcp --sport 22 --src 10.0.1.10 -j ACCEPT
+\end{lstlisting}
+\endgroup
+
+\subsubsection*{Politica Permisiva}
+
+Reiniciamos la topología
 
 \newpage
 \printbibliography
