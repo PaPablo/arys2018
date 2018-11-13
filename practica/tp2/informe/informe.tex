@@ -821,6 +821,29 @@ Reiniciamos la topología e ingresamos las siguientes instrucciones de iptables 
     \item Desde el firewall se permite comunicarse mediante SSH con el servidor.
 \end{itemize}
 
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+iptables -F
+iptables -X
+
+iptables -P FORWARD ACCEPT
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+
+# Permitir conexiones desde la LAN al servidor a los servicios
+# de FTP, SSH, HTTP
+iptables -A FORWARD -p tcp --src 10.0.0.0/24 --dst 10.0.1.10 -m multiport --dports 0:20,23:79,81:65535 -j DROP
+iptables -A FORWARD -p tcp --dst 10.0.0.0/24 --src 10.0.1.10 -m multiport --sports 0:20,23:79,81:65535 
+iptables -A FORWARD ! --src 10.0.0.24 -j DROP
+
+# Permitir solamente conexiones SSH del firewall al servidor
+iptables -A INPUT -p tcp ! --src 10.0.1.10 -m multiport --sports 0:21,23:65535 -j DROP
+iptables -A OUTPUT -p tcp ! --dst 10.0.1.10 -m multiport --dports 0:21,23:65535 -j DROP
+
+\end{lstlisting}
+\endgroup
+
 \newpage
 \printbibliography
 
