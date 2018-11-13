@@ -556,8 +556,164 @@ iptables -A INPUT --src 10.0.0.10 -m state --state NEW -j DROP
 
 Armamos la topología planteada en el enunciado (respetando el nombre de cada nodo) y revisamos las configuraciones de red de cada nodo. 
 
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}
+
+# Nodo n1
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.1.10  netmask 255.255.255.0  broadcast 10.0.1.255
+        inet6 2001:1::10  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::200:ff:feaa:4  prefixlen 64  scopeid 0x20<link>
+        ether 00:00:00:aa:00:04  txqueuelen 1000  (Ethernet)
+        RX packets 151  bytes 12643 (12.6 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 48  bytes 4725 (4.7 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      49/sshd             
+tcp6       0      0 :::80                   :::*                    LISTEN      65/apache2          
+tcp6       0      0 :::22                   :::*                    LISTEN      49/sshd        
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.1.1        0.0.0.0         UG        0 0          0 eth0
+10.0.1.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+
+Chain INPUT (policy ACCEPT 3 packets, 285 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 3 packets, 201 bytes)
+ pkts bytes target     prot opt in     out     source               destination       
+
+# Nodo n2
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.21  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 2001::21  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::200:ff:feaa:1  prefixlen 64  scopeid 0x20<link>
+        ether 00:00:00:aa:00:01  txqueuelen 1000  (Ethernet)
+        RX packets 163  bytes 15011 (15.0 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 32  bytes 2357 (2.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name 
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.0.1        0.0.0.0         UG        0 0          0 eth0
+10.0.0.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination 
+
+# Nodo n3
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.20  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 2001::20  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::200:ff:feaa:0  prefixlen 64  scopeid 0x20<link>
+        ether 00:00:00:aa:00:00  txqueuelen 1000  (Ethernet)
+        RX packets 190  bytes 16978 (16.9 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 14  bytes 1172 (1.1 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.0.1        0.0.0.0         UG        0 0          0 eth0
+10.0.0.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
 
 
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+# Nodo n5
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.1  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 2001::1  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::200:ff:feaa:2  prefixlen 64  scopeid 0x20<link>
+        ether 00:00:00:aa:00:02  txqueuelen 1000  (Ethernet)
+        RX packets 43  bytes 3199 (3.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 164  bytes 15125 (15.1 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.1.1  netmask 255.255.255.0  broadcast 10.0.1.255
+        inet6 fe80::200:ff:feaa:3  prefixlen 64  scopeid 0x20<link>
+        inet6 2001:1::1  prefixlen 64  scopeid 0x0<global>
+        ether 00:00:00:aa:00:03  txqueuelen 1000  (Ethernet)
+        RX packets 49  bytes 4795 (4.7 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 182  bytes 15273 (15.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:2601            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:2604            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:2606            0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::2601                 :::*                    LISTEN      -                   
+tcp6       0      0 :::2604                 :::*                    LISTEN      -                   
+tcp6       0      0 :::2606                 :::*                    LISTEN      -  
+
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+10.0.0.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+10.0.1.0        0.0.0.0         255.255.255.0   U         0 0          0 eth1
+
+\end{lstlisting}
+\endgroup
+
+Luego evidenciamos la conexión de red entre los nodos.
+
+\begin{figure}[!ht]
+   \centering
+   \includegraphics[width=0.9\textwidth]{img/ping-n2-n1}
+   \caption{Ping de n2 a n1}
+   \centering
+   \label{label:file_name}
+\end{figure}
+
+\begin{figure}[!ht]
+   \centering
+   \includegraphics[width=0.9\textwidth]{img/ping-n2-n3}
+   \caption{Ping de n2 a n3}
+   \centering
+   \label{label:file_name}
+\end{figure}
+
+\begin{figure}[!ht]
+   \centering
+   \includegraphics[width=0.9\textwidth]{img/ping-n3-n1}
+   \caption{Ping de n3 a n1}
+   \centering
+   \label{label:file_name}
+\end{figure}
 \pagebreak
 
 %-------------------------------------------------------------------------------
