@@ -813,7 +813,13 @@ iptables -A INPUT -p tcp --sport 22 --src 10.0.1.10 -j ACCEPT
 
 \subsubsection*{Politica Permisiva}
 
-Reiniciamos la topología
+Reiniciamos la topología e ingresamos las siguientes instrucciones de iptables para lograr una politica permisiva que:
+
+\begin{itemize}
+    \item Permita acceso desde LAN al servidor a los servicios FTP, SSH y HTTP.
+    \item Ninguna otra comunicación hacia el Firewall está permitida. Tanto desde la LAN como desde el Servidor.
+    \item Desde el firewall se permite comunicarse mediante SSH con el servidor.
+\end{itemize}
 
 \newpage
 \printbibliography
