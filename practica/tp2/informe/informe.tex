@@ -840,10 +840,38 @@ iptables -A FORWARD ! --src 10.0.0.24 -j DROP
 # Permitir solamente conexiones SSH del firewall al servidor
 iptables -A INPUT -p tcp ! --src 10.0.1.10 -m multiport --sports 0:21,23:65535 -j DROP
 iptables -A OUTPUT -p tcp ! --dst 10.0.1.10 -m multiport --dports 0:21,23:65535 -j DROP
-
 \end{lstlisting}
 \endgroup
 
+\subsubsection*{Configuración Hogareña}
+
+Reiniciamos el simulador y configuramos el firewall para cumplir con los requisitos:
+
+\begin{itemize}
+    \item El cliente pueda realizar cualquier tipo de conexión hacia Internet.
+    \item Desde Internet no se puedan ingresar comunicaciones hacia las PCs de la red hogareña.
+\end{itemize}
+
+\begingroup
+    \fontsize{9pt}{10pt}\selectfont
+\begin{lstlisting}[breaklines=true]
+# Politica restrictiva
+iptables -P FORWARD DROP
+
+# Lo proveniente de la red LAN, se deja pasar
+iptables -A FORWARD --src 10.0.0.0/24 -j ACCEPT
+
+# Los paquetes provenientes de conexiones ya establecidas se dejan pasar
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+\end{lstlisting}
+\endgroup
+
+
+\subsubsection*{¿Qué es más ventajoso? Firewall stateful o stateless}
+
+En mi opinión puede ser mejor un firewall stateless, ya que no debe llevar la cuenta o verificar el estado de cada paquete al momento de filtrar. Es una operación idempotente cada vez que un paquete atraviesa el firewall.
+
+Pero un firewall stateful no otorga la ventaja de atajar casos que pueden haberse escapado al momento de configurar el firewall
 \newpage
 \printbibliography
 
