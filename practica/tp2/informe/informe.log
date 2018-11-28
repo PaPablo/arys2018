@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.12)  15 OCT 2018 20:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.12)  14 NOV 2018 19:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -707,7 +707,14 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count301
 \@quotereset=\count302
-(./informe.aux)
+(./informe.aux
+
+LaTeX Warning: Label `label:file_name' multiply defined.
+
+
+LaTeX Warning: Label `label:file_name' multiply defined.
+
+)
 \openout1 = `informe.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
@@ -864,35 +871,13 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
-LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 24.
- (./informe.toc
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 4.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 4.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 4.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 4.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 4.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 4.
-)
-\tf@toc=\write5
-\openout5 = `informe.toc'.
-
- [1
-
-]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 36.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 35.
 LaTeX Font Info:    Font shape `T1/futs/bx/sc' in size <17.28> not available
-(Font)              Font shape `T1/futs/b/sc' tried instead on input line 36.
+(Font)              Font shape `T1/futs/b/sc' tried instead on input line 35.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 39.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 41.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 36.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 38.
  (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
@@ -901,11 +886,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (0.44658pt too wide) in paragraph at lines 41--42
+Overfull \hbox (0.44658pt too wide) in paragraph at lines 38--39
 \T1/futs/m/n/12 (-20) Footprinting , tam-bi閚 cono-cido como \T1/cmtt/m/n/12 reconocimiento \T1/futs/m/n/12 (-20) es una t閏-nica uti-lizada para recolec-
  []
 
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 44.
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 41.
 (/usr/share/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
 )
@@ -914,57 +899,425 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 51.
- [2]
-Overfull \hbox (28.78027pt too wide) in paragraph at lines 96--112
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 48.
+ [1]
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 93.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 8.27998pt on input line 93.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.43999pt on input line 93.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 93.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 8.27998pt on input line 93.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.43999pt on input line 93.
+
+Overfull \hbox (28.78027pt too wide) in paragraph at lines 93--109
 [][] 
  []
 
-[3] [4]
+[2] [3]
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.25598pt on input line 154.
+(Font)              scaled to size 6.25598pt on input line 151.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 154.
+(Font)              scaled to size 5.51999pt on input line 151.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.25598pt on input line 154.
+(Font)              scaled to size 6.25598pt on input line 151.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 154.
+(Font)              scaled to size 5.51999pt on input line 151.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 166.
+(Font)              scaled to size 6.99199pt on input line 163.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 166.
- [5]
-Overfull \hbox (14.1388pt too wide) in paragraph at lines 186--187
+(Font)              scaled to size 6.99199pt on input line 163.
+ [4]
+Overfull \hbox (14.1388pt too wide) in paragraph at lines 183--184
 []\T1/futs/m/n/12 (-20) Seguidamente, le ped-i-mos a \T1/cmtt/m/n/12 nmap\T1/futs/m/n/12 (-20) , ex-plici-ta-mente, que es-ca-nee los 65536 puer-tos disponibles. 
  []
 
-[6]
-Overfull \hbox (25.8034pt too wide) in paragraph at lines 218--218
+[5] [6] [7] [8] [9] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2018/09/02 1.7 listings language file
+) (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2018/09/02 1.7 listings language file
+) [10] [11]
+Overfull \hbox (10.04404pt too wide) in paragraph at lines 502--503
+\T1/cmtt/m/n/12 Configure el firewall del Servidor Web para aceptar solamente conexiones al
+ []
+
+[12]
+Overfull \hbox (10.04404pt too wide) in paragraph at lines 518--519
+\T1/cmtt/m/n/12 Configure el firewall del Servidor Web para aceptar solamente conexiones al
+ []
+
+
+./informe.tex:524: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.524 ...on que no sea para el puerto 80 deber铆a 
+                                                  ser descartada
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:524: Package inputenc Error: Invalid UTF-8 byte 173.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.524 ...on que no sea para el puerto 80 deber铆a 
+                                                  ser descartada
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+Overfull \hbox (3.87054pt too wide) in paragraph at lines 532--533
+\T1/cmtt/m/n/12 Configure el firewall del Servidor Web para redireccionar toda petici髇 al
+ []
+
+
+Overfull \hbox (22.23657pt too wide) in paragraph at lines 535--536
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (16.21753pt too wide) in paragraph at lines 540--541
+\T1/cmtt/m/n/12 Configure el firewall del Cliente de modo que, para cualquiera de los puntos
+ []
+
+
+Overfull \hbox (15.90886pt too wide) in paragraph at lines 540--541
+\T1/cmtt/m/n/12 comunicaci髇 (siempre y cuando el Servidor se lo permita), pero sin permitir
+ []
+
+[13]
+Overfull \hbox (3.2284pt too wide) in paragraph at lines 572--573
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.2284pt too wide) in paragraph at lines 603--605
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[14]
+Overfull \hbox (3.2284pt too wide) in paragraph at lines 632--634
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[15]
+Overfull \hbox (3.2284pt too wide) in paragraph at lines 672--673
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<img/ping-n2-n1.png, id=58, 929.4725pt x 443.6575pt>
+File: img/ping-n2-n1.png Graphic file (type png)
+<use img/ping-n2-n1.png>
+Package pdftex.def Info: img/ping-n2-n1.png  used on input line 693.
+(pdftex.def)             Requested size: 407.66833pt x 194.58708pt.
+LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 694.
+<img/ping-n2-n3.png, id=59, 889.3225pt x 476.78125pt>
+File: img/ping-n2-n3.png Graphic file (type png)
+<use img/ping-n2-n3.png>
+Package pdftex.def Info: img/ping-n2-n3.png  used on input line 701.
+(pdftex.def)             Requested size: 407.66833pt x 218.55815pt.
+[16 <./img/ping-n2-n1.png>]
+<img/ping-n3-n1.png, id=63, 924.45375pt x 508.90125pt>
+File: img/ping-n3-n1.png Graphic file (type png)
+<use img/ping-n3-n1.png>
+Package pdftex.def Info: img/ping-n3-n1.png  used on input line 709.
+(pdftex.def)             Requested size: 407.66833pt x 224.41422pt.
+ [17 <./img/ping-n2-n3.png> <./img/ping-n3-n1.png>]
+
+./informe.tex:746: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.746 # Se permita 煤nicamente 
+                               el acceso desde la LAN a los servicios: FTP, ...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:746: Package inputenc Error: Invalid UTF-8 byte 186.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.746 # Se permita 煤nicamente 
+                               el acceso desde la LAN a los servicios: FTP, ...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+Overfull \hbox (55.50089pt too wide) in paragraph at lines 746--748
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+./informe.tex:753: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.753 # Conexi贸n 
+                  al servidor en servicio web
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:753: Package inputenc Error: Invalid UTF-8 byte 179.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.753 # Conexi贸n 
+                  al servidor en servicio web
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:762: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.762 # Prohibir toda conexi贸n 
+                                hacia el firewall tanto desde el servidor co...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:762: Package inputenc Error: Invalid UTF-8 byte 179.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.762 # Prohibir toda conexi贸n 
+                                hacia el firewall tanto desde el servidor co...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:770: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.770 ...vidor a los clientes de la LAN a trav茅s 
+                                                  de SSH
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:770: Package inputenc Error: Invalid UTF-8 byte 169.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.770 ...vidor a los clientes de la LAN a trav茅s 
+                                                  de SSH
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+[18]
+
+./informe.tex:786: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.786 # Configure el firewall con una pol铆tica 
+                                                restrictiva y sin estados, d...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:786: Package inputenc Error: Invalid UTF-8 byte 173.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.786 # Configure el firewall con una pol铆tica 
+                                                restrictiva y sin estados, d...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:787: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.787 # que se permita 煤nicamente 
+                                   el acceso desde el cliente al servidor, a...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:787: Package inputenc Error: Invalid UTF-8 byte 186.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.787 # que se permita 煤nicamente 
+                                   el acceso desde el cliente al servidor, a...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:788: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.788 ... en cuenta que ninguna otra comunicaci贸n
+                                                  
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:788: Package inputenc Error: Invalid UTF-8 byte 179.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.788 ... en cuenta que ninguna otra comunicaci贸n
+                                                  
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:796: Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.796 # Conexi贸n 
+                  al servidor mediante ssh, ftp y http al servidor
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+./informe.tex:796: Package inputenc Error: Invalid UTF-8 byte 179.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.796 # Conexi贸n 
+                  al servidor mediante ssh, ftp y http al servidor
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+[19] [20]
+LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <24.88> not available
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 873.
+
+Overfull \hbox (25.8034pt too wide) in paragraph at lines 874--874
 []\T1/futs/m/n/12 (-20) Wikipedia. \T1/futs/m/it/12 (-20) Foot-print-ing\T1/futs/m/n/12 (-20) . Oct. 2018. \T1/futs/m/sc/12 (-20) url\T1/futs/m/n/12 (-20) : $\T1/cmtt/m/n/12 https : / / en . wikipedia . org / wiki / Footprinting$\T1/futs/m/n/12 (-20) . 
  []
 
 
 AED: lastpage setting LastPage
-[7
+[21
 
 ] (./informe.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package logreq Info: Writing requests to 'informe.run.xml'.
 \openout1 = `informe.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 15190 strings out of 492642
- 250235 string characters out of 6135566
- 855874 words of memory out of 5000000
- 18740 multiletter control sequences out of 15000+600000
- 132603 words of font info for 177 fonts, out of 8000000 for 9000
+ 15631 strings out of 492642
+ 255231 string characters out of 6135566
+ 958501 words of memory out of 5000000
+ 19096 multiletter control sequences out of 15000+600000
+ 151544 words of font info for 238 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,11n,45p,846b,1670s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,12n,51p,846b,1807s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on informe.pdf (8 pages, 93029 bytes).
+Output written on informe.pdf (22 pages, 485947 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 100 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 35841 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 43536 words of extra memory for PDF output out of 51595 (max. 10000000)
 
