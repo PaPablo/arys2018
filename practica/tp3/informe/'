@@ -85,13 +85,14 @@ Al firmar un mensaje, lo que llega es el documento junto con la información de 
 
 En los clientes habituales, en mi caso Android, al recibir un mail encriptado me pide que revise las opciones de encriptación de mi cuenta de GMAIL, luego de setear correctamente las claves e importar los certificados. El contenido del mail es desencriptado con total normalidad.
 
+
 Al momento de recibir un mail encriptado, en el cliente de correo de Thunderbird lo recibo con total normalidad. Pero es porque posee la clave pública junto con el certificado avalando la autenticidad de la clave.
 
 \textbf{Escenarios} 
 
-\textbf{a. Su clave privada fue robada:} Se debe reportar el incidente a la autoridad de registración. Para que en la autoridad certificante pueda marcar nuestra clave pública actual como inválidad. Y generar un nuevo par de claves para operar.
+\textbf{1. Su clave privada fue robada:} Se debe reportar el incidente a la autoridad de registración. Para que en la autoridad certificante pueda marcar nuestra clave pública actual como inválidad. Y generar un nuevo par de claves para operar.
 
-\textbf{b. Su clave privada fue robada y además usted perdió acceso a la misma, puesto que la misma fue borrada de su sistema: }
+\textbf{Su clave privada fue robada y además usted perdió acceso a la misma, puesto que la misma fue borrada de su sistema: }
 
 \begin{enumerate}
     \item Si se pierde acceso a la clave privada y además fue robada. Una salida a esta situación es, al momento de generar las claves, también generar el certificado de revocación, para ser usado en caso de ser necesario. Este certificado se lleva a la Autoridad de Registro.
@@ -111,27 +112,14 @@ Si, en cambio, es el otro extremo el que nos envía un correo encriptado, necesi
 
 En todo caso, este procedimiento depende fuertemente de la confianza que se le imprima a la clave desde el cliente de correo. En nuestro caso para otorgar confianza en necesario haber obtenido el certificado del emisor y haberle dado el nivel de confianza deseado. De esta forma se nos advertirá sobre las consecuencias del uso de esta clave.
 
-\textbf{Escenarios}
+22
+	
+	1.a. La información firmada con esa clave seguirá siendo poder accedida con el uso de la clave pública actual, hasta que se genere el certificado de revocación. A partir de ese momento perderá validez.
+	2.a. La información quedará al descubierto, por lo que se debe generar el certificado de revocación lo antes posibles, de esta manera, la futura información quedará al resguardo y, la información queda al descubierto, se sabe que está encriptada con una clave pública obsoleta.
+	3.a. Como se dijo, se debe generar el certificado de revocación
 
-\textbf{a. Alguien le ha robado la clave privada. Usted no habı́a generado un certificado de revocación para su clave. Sin embargo, usted dispone de la clave privada actualmente, del mismo modo que la persona que se la robó}
+	1, 2 y 3, b. En el caso de haber perdido la clave y no tener certificado de revocación es necesario crear un nuevo par de claves. Esto tomará el trabajo de realizar todo el procedimiento que se realizó para obtener el par original de claves.
 
-\textbf{b. Alguien le ha robado la clave privada y además borró la misma de su almacén de claves. Usted no habı́a generado una revocación de su clave.}\\
-
-A considerar: 
-
-\begin{enumerate}
-    \item ¿Qué consecuencias sufro respecto de la información que se firma con esa clave?
-    \item ¿Qué consecuencias sufro respecto de la información encriptada para que solo esa clave pueda abrir?
-    \item ¿Qué acciones se pueden llevar a cabo en cada caso? y ¿cómo debo proceder?
-\end{enumerate}
-
-\textbf{1.a.} La información firmada con esa clave seguirá siendo poder accedida con el uso de la clave pública actual, hasta que se genere el certificado de revocación. A partir de ese momento perderá validez.
-
-\textbf{2.a.} La información quedará al descubierto, por lo que se debe generar el certificado de revocación lo antes posibles, de esta manera, la futura información quedará al resguardo y, la información queda al descubierto, se sabe que está encriptada con una clave pública obsoleta.
-
-\textbf{3.a.} Como se dijo, se debe generar el certificado de revocación
-
-\textbf{1, 2 y 3, b.} En el caso de haber perdido la clave y no tener certificado de revocación es necesario crear un nuevo par de claves. Esto tomará el trabajo de realizar todo el procedimiento que se realizó para obtener el par original de claves.
 
 \subsubsection*{GPG - GNU}
 
@@ -148,11 +136,6 @@ Introducimos la clave para encriptar (dos veces), en nuestro caso 1234, y obtene
 $ gpg -d archivo.txt
 \end{lstlisting}
 
-\subsubsection*{Esteganografía}
-
-Al esconder el texto seleccionado, en nuestro caso un par de párrafos de la novela El Hobbit, la imagen no parece, a simple vista haber sufrido cambios.
-
-Al momento de extraer el texto obtenemos aquello que insertamos dentro.
 
 \end{document}
 

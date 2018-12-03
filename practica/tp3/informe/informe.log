@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.12)  19 NOV 2018 14:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.9.12)  30 NOV 2018 15:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -872,26 +872,71 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 37.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 56.
+ [1] [2]
+
+./informe.tex:116: Package inputenc Error: Unicode character ́ (U+301)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.116 ...ismo modo que la persona que se la robó}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./informe.tex:118: Package inputenc Error: Unicode character ́ (U+301)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 ...�a generado una revocación de su clave.}
+                                                  \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
+
+ []
+
+[3]
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 142.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 8.27998pt on input line 142.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.43999pt on input line 142.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 142.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 8.27998pt on input line 142.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.43999pt on input line 142.
  
 AED: lastpage setting LastPage
-[1] (./informe.aux)
+[4] (./informe.aux)
 Package logreq Info: Writing requests to 'informe.run.xml'.
 \openout1 = `informe.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 14549 strings out of 492642
- 241101 string characters out of 6135566
- 792799 words of memory out of 5000000
- 18164 multiletter control sequences out of 15000+600000
- 74886 words of font info for 95 fonts, out of 8000000 for 9000
+ 14905 strings out of 492642
+ 244310 string characters out of 6135566
+ 794799 words of memory out of 5000000
+ 18458 multiletter control sequences out of 15000+600000
+ 96722 words of font info for 159 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  44i,11n,43p,846b,1582s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb>
-Output written on informe.pdf (2 pages, 37056 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb>
+Output written on informe.pdf (5 pages, 50706 bytes).
 PDF statistics:
- 20 PDF objects out of 1000 (max. 8388607)
- 13 compressed objects within 1 object stream
+ 33 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 24577 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 25601 words of extra memory for PDF output out of 29859 (max. 10000000)
 
