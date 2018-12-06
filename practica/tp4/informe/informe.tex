@@ -1,0 +1,233 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template: Project Titlepage Modified (v 0.1) by rcx
+%
+% Original Source: http://www.howtotex.com
+% Date: February 2014
+% 
+% This is a title page template which be used for articles & reports.
+% 
+% This is the modified version of the original Latex template from
+% aforementioned website.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\input{project_settings}
+
+\begin{document}
+
+\input{titlepage}
+
+\newpage
+
+%-------------------------------------------------------------------------------
+% Section title formatting
+\sectionfont{\scshape}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% BODY
+%-------------------------------------------------------------------------------
+
+\section*{Ssh-Keygen}
+
+\texttt{ssh-keygen} es una herramienta para generar, administrar y convertir claves utilizadas por la aplicación \texttt{ssh}. También sirve para actualizar la lista de revocación de claves.
+
+Al momento de generar claves se puede realizar con y sin contraseña. En ambos casos la generación se hace con:
+
+\begin{lstlisting}
+$ ssh-keygen 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/pablo/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/pablo/.ssh/id_rsa.
+Your public key has been saved in /home/pablo/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:Up6KjbnEV4Hgfo75YM393QdQsK3Z0aTNBz0DoirrW+c pablo@pablox
+The key's randomart image is:
++---[RSA 2048]----+
+|    .      ..oo..|
+|   . . .  . .o.X.|
+|    . . o.  ..+ B|
+|   .   o.o  .+ ..|
+|    ..o.S   o..  |
+|   . %o=      .  |
+|    @.B...     . |
+|   o.=. o. . .  .|
+|    .oo  E. . .. |
++----[SHA256]-----+
+\end{lstlisting}
+
+La gran diferencia está en el momento de insertar la contraseña (o passphrase). En caso de no desear ponerle contraseña a las claves generadas se aprieta enter al momento en el que se nos pida una passphrase.
+
+\subsection*{\texttt{authorized\_keys} y \texttt{known\_hosts}}
+
+El archivo \texttt{\$HOME/.ssh/authorized\_keys} contiene la lista de las claves públicas de los hosts que tienen permitido el ingreso al sistema. Y en el archivo \texttt{\$HOME/.ssh/known\_hosts} contiene la lista de claves de los hosts que se han conectado con el equipo. 
+
+\subsection*{SSH COPY ID}
+
+Con el comando \texttt{ssh\_copy\_id} podemos copiar a una máquina remota un archivo específico de claves para usar con ese equipo en particular.
+
+En nuestro caso, copiamos el archivo a la máquina remota:
+
+\begin{lstlisting}[breaklines=true]
+$ ssh-copy-id -i ~/.ssh/id_rsa_1_no_pass pablo@192.168.0.102
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/pablo/.ssh/id_rsa_1_no_pass.pub"
+The authenticity of host '192.168.0.102 (192.168.0.102)' can't be established.
+ECDSA key fingerprint is SHA256:JKiSYXpD5S8UnhArc/0ha9G39v09YRdrCSXcHiorlEk.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+pablo@192.168.0.102's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'pablo@192.168.0.102'"
+and check to make sure that only the key(s) you wanted were added.
+\end{lstlisting}
+
+Y en el equipo remoto deshabilitamos la autenticación por contraseña en el archivo \texttt{/etc/ssh/sshd\_config} agregando la línea \texttt{PasswordAuthentication no}.
+
+Al intentar hacer un ingreso por ssh a la máquina remota, especificando el archivo que se copió anteriormente, no nos pedirá contraseña e ingresará.
+
+\section*{Túneles SSH}
+
+\subsection*{Punto 4 - Ana}
+
+Para poder resolver la necesidad de Anda, que es poder redireccionar las peticiones a \texttt{localhost:3306} al servidor con la instancia real de MySQL corriendo lo que debe hacer es crear un túnel directo por ssh escribiendo: 
+
+\begin{lstlisting}
+$ ssh -L 3306:localhost:3306 ana@servidor 
+\end{lstlisting}
+
+Lo que hace esta línea es redireccionar las peticiones a \texttt{localhost:3306} a \texttt{ana@servidor:3306} a través de una conexión ssh, que además va encriptada.
+
+\subsection*{Punto 5 - Matías}
+
+Matías desea conectarse por ssh desde su computadora personal al servidor al que tiene acceso. Para lograr eso debe escribir:
+
+\begin{lstlisting}
+$ ssh -R 222:localhost:22 mati@personal
+\end{lstlisting}
+
+De esta forma las conexiones al 222 del servidor (mati@peronal) van al 22 del servidor.
+
+Así, desde la máquina personal de Matias se puede hacer \texttt{ssh server -p 222} y acceder al servidor.
+
+\subsection*{Punto 6 - Túneles con NAT}
+
+Marina desea conectarse al servidor de José que está detrás de un servicio de NAT. Como ella también se encuentra tras un servicio de NAT, deben confluir en un punto accesible por ambos extremos para poder realizar la conexión por túnel.
+
+Esto se resulve de la siguiente forma.
+
+\begin{lstlisting}
+# Suponemos que 8080 es el puerto del servicio en el servidor de José
+
+# Marina debe ejecutar
+ssh -R 5050:localhost:8080 maquina@externa
+
+# José debe ejecutar 
+ssh -R 5050:localhost:8080 maquina@externa
+ 
+\end{lstlisting}
+
+Así, Marina al conectarse al puerto 8080 de su localhost, ssh estará haciendo forward al 5050 de la máquina remota, que estará haciendo el forward al puerto 8080 en la maquina de José.
+
+\section*{Ssh - Otras cuestiones}
+
+\subsection*{Punto 7 - X11 Forwarding}
+
+Lo que debe hacer Ernetso es:
+
+\begin{lstlisting}
+$ ssh -X maquina@ip
+\end{lstlisting}
+
+De esta forma, el socket de X11 en la máquina remota hara el forward al X11 local y la ventana de, por ejemplo, Firefox se dibujará en la máquina local.
+
+Sin embargo, se debe tener en cuenta que debe estar habilitado el forwarding del socket de X11, en el archivo de configuración de ssh.
+
+\subsection*{Punto 8 - Alias}
+
+Para configurar alias en \texttt{ssh} es necesario modificar (o crear en el caso de que no exista) el archivo \texttt{~/.ssh/config}. Respetando la sintaxis explicada en páginas man de \texttt{ssh\_config}. En nuestro caso, tiene la siguiente forma.
+
+\begin{lstlisting}
+Host servidor1
+    User administrador
+    HostName 192.168.1.40
+    Port 22022
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/keys/servidor1
+\end{lstlisting}
+
+Luego, al hacer \texttt{ssh servidor1}, se conectará utilizando la configuración especificada.
+\end{document}
+
+
+%-------------------------------------------------------------------------------
+% SNIPPETS
+%-------------------------------------------------------------------------------
+
+%\begin{figure}[!ht]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{file_name}
+%   \caption{}
+%   \centering
+%   \label{label:file_name}
+%\end{figure}
+
+
+%\begin{figure}[!ht]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{graph}
+%   \caption{Blood pressure ranges and associated level of hypertension (American Heart Association, 2013).}
+%   \centering
+%   \label{label:graph}
+%\end{figure}
+
+%\begin{wrapfigure}{r}{0.30\textwidth}
+%   \vspace{-40pt}
+%   \begin{center}
+%       \includegraphics[width=0.29\textwidth]{file_name}
+%   \end{center}
+%   \vspace{-20pt}
+%   \caption{}
+%   \label{label:file_name}
+%\end{wrapfigure}
+
+%\begin{wrapfigure}{r}{0.45\textwidth}
+%   \begin{center}
+%       \includegraphics[width=0.29\textwidth]{manometer}
+%   \end{center}
+%   \caption{Aneroid sphygmomanometer with stethoscope (Medicalexpo, 2012).}
+%   \label{label:manometer}
+%\end{wrapfigure}
+
+%\begin{table}[!ht]\footnotesize
+%   \centering
+%   \begin{tabular}{cccccc}
+%   \toprule
+%   \multicolumn{2}{c} {Pearson's correlation test} & \multicolumn{4}{c} {Independent t-test} \\
+%   \midrule    
+%   \multicolumn{2}{c} {Gender} & \multicolumn{2}{c} {Activity level} & \multicolumn{2}{c} {Gender} \\
+%   \midrule
+%   Males & Females & 1st level & 6th level & Males & Females \\
+%   \midrule
+%   \multicolumn{2}{c} {BMI vs. SP} & \multicolumn{2}{c} {Systolic pressure} & \multicolumn{2}{c} {Systolic Pressure} \\
+%   \multicolumn{2}{c} {BMI vs. DP} & \multicolumn{2}{c} {Diastolic pressure} & \multicolumn{2}{c} {Diastolic pressure} \\
+%   \multicolumn{2}{c} {BMI vs. MAP} & \multicolumn{2}{c} {MAP} & \multicolumn{2}{c} {MAP} \\
+%   \multicolumn{2}{c} {W:H ratio vs. SP} & \multicolumn{2}{c} {BMI} & \multicolumn{2}{c} {BMI} \\
+%   \multicolumn{2}{c} {W:H ratio vs. DP} & \multicolumn{2}{c} {W:H ratio} & \multicolumn{2}{c} {W:H ratio} \\
+%   \multicolumn{2}{c} {W:H ratio vs. MAP} & \multicolumn{2}{c} {\% Body fat} & \multicolumn{2}{c} {\% Body fat} \\
+%   \multicolumn{2}{c} {} & \multicolumn{2}{c} {Height} & \multicolumn{2}{c} {Height} \\
+%   \multicolumn{2}{c} {} & \multicolumn{2}{c} {Weight} & \multicolumn{2}{c} {Weight} \\
+%   \multicolumn{2}{c} {} & \multicolumn{2}{c} {Heart rate} & \multicolumn{2}{c} {Heart rate} \\
+%   \bottomrule
+%   \end{tabular}
+%   \caption{Parameters that were analysed and related statistical test performed for current study. BMI - body mass index; SP - systolic pressure; DP - diastolic pressure; MAP - mean arterial pressure; W:H ratio - waist to hip ratio.}
+%   \label{label:tests}
+%\end{table}
